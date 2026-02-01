@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Farha Ahmed</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #000;
+            font-family: 'Helvetica Neue', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Deep Aurora Background */
+        .background {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 20% 30%, #4a0e2e 0%, #000 70%);
+            z-index: -1;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 50px 30px;
+            text-align: center;
+            width: 85%;
+            max-width: 400px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            animation: floatCard 6s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Glowing Photo Frame */
+        .photo-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 30px;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 77, 109, 0.5);
+        }
+
+        .photo-glow {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 50%;
+            box-shadow: 0 0 40px #ff4d6d;
+            z-index: -1;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(0.95); opacity: 0.5; }
+        }
+
+        h1 {
+            color: white;
+            font-weight: 200;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 22px;
+            margin-bottom: 30px;
+        }
+
+        /* Modern Countdown Styling */
+        .timer-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .time-item {
+            flex: 1;
+        }
+
+        .time-value {
+            font-size: 28px;
+            font-weight: 100;
+            color: #ff4d6d;
+            display: block;
+        }
+
+        .time-label {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Heart Particles */
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            z-index: 99;
+            animation: riseUp 5s linear forwards;
+        }
+
+        @keyframes riseUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="background"></div>
+
+<div class="glass-card">
+    <div class="photo-container">
+        <div class="photo-glow"></div>
+        <img src="farha.jpg" alt="Farha Ahmed" onerror="this.src='https://via.placeholder.com/180?text=Upload+Photo'">
+    </div>
+
+    <h1>Farha Ahmed</h1>
+    
+    <div class="timer-row">
+        <div class="time-item"><span class="time-value" id="days">00</span><span class="time-label">Days</span></div>
+        <div class="time-item"><span class="time-value" id="hours">00</span><span class="time-label">Hours</span></div>
+        <div class="time-item"><span class="time-value" id="mins">00</span><span class="time-label">Mins</span></div>
+        <div class="time-item"><span class="time-value" id="secs">00</span><span class="time-label">Secs</span></div>
+    </div>
+</div>
+
+<script>
+    const bday = new Date("Feb 5, 2026 00:00:00").getTime();
+
+    function updateTimer() {
+        const now = new Date().getTime();
+        const gap = bday - now;
+        
+        document.getElementById('days').innerText = Math.floor(gap / 86400000);
+        document.getElementById('hours').innerText = Math.floor((gap % 86400000) / 3600000);
+        document.getElementById('mins').innerText = Math.floor((gap % 3600000) / 60000);
+        document.getElementById('secs').innerText = Math.floor((gap % 60000) / 1000);
+    }
+    setInterval(updateTimer, 1000);
+
+    function createHeart() {
+        const h = document.createElement('div');
+        h.className = 'heart';
+        h.innerHTML = '❤️';
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        h.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 5000);
+    }
+    setInterval(createHeart, 400);
+</script>
+
+</body>
+</html>
