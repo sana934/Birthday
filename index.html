@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Farha Ahmed</title>
+    <style>
+        :root {
+            --pink: #ff4d6d;
+            --dark: #0a0a0a;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Gradient Background Glow */
+        .glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 77, 109, 0.2) 0%, transparent 70%);
+            z-index: 0;
+            animation: pulse 4s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); opacity: 0.5; }
+            to { transform: scale(1.5); opacity: 0.8; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); /* Safari support */
+            padding: 40px 30px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            width: 80%;
+            max-width: 350px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .photo-frame {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(45deg, var(--pink), #ffccd5);
+            box-shadow: 0 0 20px rgba(255, 77, 109, 0.5);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--dark);
+        }
+
+        h1 {
+            font-size: 26px;
+            margin: 10px 0;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #fff, #ffccd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .countdown-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--pink);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 5px;
+            border-radius: 12px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .time-box label {
+            font-size: 9px;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: absolute;
+            color: var(--pink);
+            font-size: 20px;
+            pointer-events: none;
+            animation: fly 5s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes fly {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow"></div>
+
+    <div class="container">
+        <div class="photo-frame">
+            <img src="farha.jpg" alt="Farha Ahmed">
+        </div>
+        
+        <h1>Farha Ahmed</h1>
+        <span class="countdown-label">Days until Feb 5th</span>
+
+        <div class="timer-grid">
+            <div class="time-box">
+                <span id="days">00</span>
+                <label>Days</label>
+            </div>
+            <div class="time-box">
+                <span id="hours">00</span>
+                <label>Hrs</label>
+            </div>
+            <div class="time-box">
+                <span id="mins">00</span>
+                <label>Min</label>
+            </div>
+            <div class="time-box">
+                <span id="secs">00</span>
+                <label>Sec</label>
+            </div>
+        </div>
+
+        <p style="margin-top: 30px; font-style: italic; font-size: 14px; opacity: 0.8;">
+            "A special day for a special person."
+        </p>
+    </div>
+
+    <script>
+        // Set the countdown date to Feb 5
+        const birthday = new Date("Feb 5, 2026 00:00:00").getTime();
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const gap = birthday - now;
+
+            const d = Math.floor(gap / (1000 * 60 * 60 * 24));
+            const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((gap % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = d < 0 ? 0 : d;
+            document.getElementById('hours').innerText = h < 0 ? 0 : h;
+            document.getElementById('mins').innerText = m < 0 ? 0 : m;
+            document.getElementById('secs').innerText = s < 0 ? 0 : s;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Create hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
